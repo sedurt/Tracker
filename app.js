@@ -1,5 +1,5 @@
 const STORAGE_KEY = "personal_lsw_tracker_v2";
-const APP_VERSION = "2.8";
+const APP_VERSION = "2.9";
 const OLD_STORAGE_KEY = "personal_lsw_tracker_v1";
 
 function localDateKey(date = new Date()) {
@@ -269,7 +269,7 @@ function renderHistory() {
   Object.keys(state.entries).sort().reverse().slice(0, 60).forEach(date => {
     const entry = state.entries[date];
     const div = document.createElement("div"); div.className = "history-item";
-    div.innerHTML = `<strong>${date} â ${scoreForEntry(entry)}%</strong><p class="muted"></p><p class="muted small-note"></p>`;
+    div.innerHTML = `<strong>${date} — ${scoreForEntry(entry)}%</strong><p class="muted"></p><p class="muted small-note"></p>`;
     div.querySelectorAll("p")[0].textContent = entry.win || entry.improve || entry.notes || "No notes";
     div.querySelectorAll("p")[1].textContent = completionText(entry);
     list.appendChild(div);
@@ -339,7 +339,7 @@ document.querySelectorAll(".nav-btn").forEach(btn => btn.addEventListener("click
 }));
 document.getElementById("themeToggle").onclick = () => { state.settings.dark = !state.settings.dark; saveState(); render(); };
 document.getElementById("clearToday").onclick = () => {
-  if (confirm("Clear todayâs habit checks? Your reflection notes will stay.")) {
+  if (confirm("Clear today’s habit checks? Your reflection notes will stay.")) {
     getEntry().habits = {};
     saveState(true); renderCurrentScreen();
   }
