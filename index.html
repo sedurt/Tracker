@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#111827" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="LSW Tracker" />
+  <title>LSW Tracker v2.4</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Personal Daily Standard Work</p>
+        <h1 id="appTitle">LSW Tracker</h1>
+      </div>
+      <button id="themeToggle" class="ghost-btn" type="button">Theme</button>
+    </header>
+
+    <main>
+      <section id="screen-today" class="screen active">
+        <div class="card hero-card">
+          <div>
+            <p class="muted" id="todayDate"></p>
+            <h2>Today’s Progress</h2>
+          </div>
+          <div class="score-ring"><span id="todayScore">0%</span></div>
+        </div>
+
+        <div class="card">
+          <div class="section-heading">
+            <h2>Daily Habits</h2>
+            <button id="clearToday" class="small-btn danger" type="button">Clear checks</button>
+          </div>
+          <div id="habitList" class="habit-list"></div>
+        </div>
+
+        <div class="card">
+          <h2>Daily Reflection</h2>
+          <label class="field-label" for="winInput">Win for today</label>
+          <textarea id="winInput" rows="2" placeholder="What went well?"></textarea>
+          <label class="field-label" for="improveInput">Improve tomorrow</label>
+          <textarea id="improveInput" rows="2" placeholder="What needs cleaned up?"></textarea>
+          <label class="field-label" for="notesInput">Notes</label>
+          <textarea id="notesInput" rows="3" placeholder="Anything else worth tracking?"></textarea>
+        </div>
+      </section>
+
+      <section id="screen-trends" class="screen">
+        <div class="card">
+          <div class="section-heading">
+            <div>
+              <h2>Monthly Trendline</h2>
+              <p class="muted">Tracks completion percentage by month.</p>
+            </div>
+            <select id="trendSelect" aria-label="Choose trend"></select>
+          </div>
+          <canvas id="trendChart" width="900" height="420"></canvas>
+          <div id="trendSummary" class="trend-summary"></div>
+        </div>
+
+        <div class="card">
+          <h2>Habit Breakdown This Month</h2>
+          <div id="monthBreakdown" class="breakdown-list"></div>
+        </div>
+      </section>
+
+      <section id="screen-goals" class="screen">
+        <div class="card">
+          <div class="section-heading">
+            <div>
+              <h2>Monthly Goals</h2>
+              <p class="muted" id="monthlyGoalMonth"></p>
+            </div>
+            <button id="addMonthlyGoal" class="small-btn" type="button">Add monthly goal</button>
+          </div>
+          <div id="monthlyGoalList" class="goal-list"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-heading">
+            <div>
+              <h2>Overall Goals</h2>
+              <p class="muted">Longer-term goals that do not reset each month.</p>
+            </div>
+            <button id="addGoal" class="small-btn" type="button">Add overall goal</button>
+          </div>
+          <div id="goalList" class="goal-list"></div>
+        </div>
+      </section>
+
+      <section id="screen-history" class="screen">
+        <div class="card">
+          <div class="section-heading">
+            <h2>History</h2>
+            <button id="exportCsv" class="small-btn" type="button">Export CSV</button>
+          </div>
+          <div id="historyList" class="history-list"></div>
+        </div>
+      </section>
+
+      <section id="screen-settings" class="screen">
+        <div class="card">
+          <h2>Customize App</h2>
+          <label class="field-label" for="appNameInput">App name</label>
+          <input id="appNameInput" type="text" />
+          <label class="field-label" for="colorInput">Accent color</label>
+          <input id="colorInput" type="color" />
+        </div>
+
+        <div class="card">
+          <div class="section-heading">
+            <h2>Customize Habits</h2>
+            <button id="addHabit" class="small-btn" type="button">Add habit</button>
+          </div>
+          <div id="habitSettings" class="settings-list"></div>
+        </div>
+
+        <div class="card">
+          <h2>Backup</h2>
+          <p class="muted">Your data is saved on this phone/browser. Export a backup before clearing Safari data or switching phones.</p>
+          <div class="button-row">
+            <button id="exportBackup" class="primary-btn" type="button">Export backup</button>
+            <label class="primary-btn file-label" for="importBackup">Import backup</label>
+            <input id="importBackup" type="file" accept="application/json" hidden />
+          </div>
+          <button id="resetApp" class="text-danger" type="button">Reset everything</button>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="App navigation">
+      <button class="nav-btn active" data-screen="today">Today</button>
+      <button class="nav-btn" data-screen="trends">Trends</button>
+      <button class="nav-btn" data-screen="goals">Goals</button>
+      <button class="nav-btn" data-screen="history">History</button>
+      <button class="nav-btn" data-screen="settings">Settings</button>
+    </nav>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
